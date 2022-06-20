@@ -1,29 +1,21 @@
-SERVER = serv
-CLIENT = clt
+NAME = Server Client
 
 SRCS_SERV = Server_src/Server.c Server_src/Serv_utils.c
 SRCS_CLIENT = Client_src/Client.c Client_src/Client_utils.c Client_src/Fd_write.c
 
-OBJS_SERV = $(SRCS_SERV:.c=.o)
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NORM = norminette
-RM = rm -rf
+RM = rm -f
 
-SRCS_DIR = srcs/
-OBJS_DIR = Server/objs/
+all: $(NAME)
 
-all: cl srv
+Client:
+	${CC} ${CFLAGS} ${SRCS_CLIENT} -o client
+	@echo "____Client créé avec succès____"
 
-cl:
-	${CC} ${CFLAGS} ${SRCS_CLIENT} -o ${CLIENT}
-	@mv ${CLIENT} client
-	@echo "______Client créé avec succès_____"
-
-srv:
-	${CC} ${CFLAGS} ${SRCS_SERV} -o ${SERVER}
-	@mv ${SERVER} server
+Server:
+	${CC} ${CFLAGS} ${SRCS_SERV} -o server
 	@echo "______Server créé avec succès_____"
 
 clean:
